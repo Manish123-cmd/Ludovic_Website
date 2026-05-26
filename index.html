@@ -12,10 +12,6 @@
   <link rel="apple-touch-icon"
     href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMzZDFhMDgiLz4KICA8dGV4dCB4PSIzMiIgeT0iNDYiIGZvbnQtc2l6ZT0iMzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiI+8J+lkDwvdGV4dD4KPC9zdmc+">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preload" as="image" href="Assests/Bread/IMG_20191029_112925.jpg">
-  <link rel="preload" as="image" href="Assests/Bread/IMG_20210122_085104.jpg">
-  <link rel="preload" as="image" href="Assests/Bread/20230303_094424.jpg">
-  <link rel="preload" as="image" href="Assests/Bread/20220701_083237.jpg">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600&display=swap"
@@ -1391,12 +1387,13 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
       display: block;
       opacity: 0;
       transition: opacity 0.4s ease, transform 0.35s ease;
       will-change: opacity;
+      background: var(--cream);
     }
 
     /* img-ready on the SLOT (not the img tag) so bg and img sync */
@@ -1405,7 +1402,7 @@
     }
 
     .gallery-slot:hover img {
-      transform: scale(1.04);
+      transform: none;
     }
 
     /* Performance: skip rendering off-screen panels entirely */
@@ -2104,68 +2101,82 @@
       }
 
       .nav-logo-img {
-        height: 40px;
-        width: 40px;
+        height: 48px;
+        width: 48px;
+      }
+
+      body {
+        cursor: auto;
+      }
+
+      #whisk-cursor {
+        display: none;
       }
 
       /* HERO — truly centered, icons frame the content */
       #hero {
-        height: 100svh;
-        min-height: 580px;
-        padding: 0;
+        height: auto;
+        min-height: 100svh;
+        padding: 72px 14px 118px;
         align-items: center;
         justify-content: center;
       }
 
       /* Pastry items — smaller, tight to edges */
       .pastry-item {
-        width: 48px !important;
-        height: 48px !important;
-        font-size: 1.1rem !important;
+        width: 58px !important;
+        height: 58px !important;
+        font-size: 1.35rem !important;
+        z-index: 3;
       }
 
       .pastry-item .item-label {
-        font-size: 0.35rem !important;
+        font-size: 0.36rem !important;
+        max-width: 52px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       /* Top row */
       .pi-0 {
-        top: 9% !important;
-        left: 2% !important;
+        top: 118px !important;
+        left: 14px !important;
         bottom: auto !important;
       }
 
       .pi-1 {
-        top: 9% !important;
-        left: 21% !important;
+        top: 126px !important;
+        left: 23% !important;
         bottom: auto !important;
       }
 
       .pi-2 {
-        top: 9% !important;
-        right: 21% !important;
+        top: 126px !important;
+        right: 23% !important;
         left: auto !important;
         bottom: auto !important;
       }
 
       .pi-3 {
-        top: 9% !important;
-        right: 2% !important;
+        top: 118px !important;
+        right: 14px !important;
         left: auto !important;
         bottom: auto !important;
       }
 
       /* Middle sides only */
       .pi-4 {
-        top: 47% !important;
-        left: 0% !important;
+        display: none !important;
+        top: 52% !important;
+        left: 6px !important;
         bottom: auto !important;
         transform: translateY(-50%) !important;
       }
 
       .pi-5 {
-        top: 47% !important;
-        right: 0% !important;
+        display: none !important;
+        top: 52% !important;
+        right: 6px !important;
         left: auto !important;
         bottom: auto !important;
         transform: translateY(-50%) !important;
@@ -2173,50 +2184,54 @@
 
       /* Bottom row — above dark toggle button */
       .pi-6 {
-        bottom: 10% !important;
+        bottom: 46px !important;
         top: auto !important;
-        left: 2% !important;
+        left: 14px !important;
       }
 
       .pi-7 {
-        bottom: 10% !important;
+        bottom: 46px !important;
         top: auto !important;
-        left: 21% !important;
+        left: 23% !important;
       }
 
       .pi-8 {
-        bottom: 10% !important;
+        bottom: 46px !important;
         top: auto !important;
-        right: 21% !important;
+        right: 23% !important;
         left: auto !important;
       }
 
       .pi-9 {
-        bottom: 10% !important;
+        bottom: 46px !important;
         top: auto !important;
-        right: 2% !important;
+        right: 14px !important;
         left: auto !important;
       }
 
       /* Hero stage — compact centred block */
       .hero-stage {
-        padding: 0 14px;
-        max-width: 320px;
+        padding: 0 18px;
+        max-width: 350px;
         width: 100%;
+        margin: 0 auto;
+        transform: translateY(-18px);
       }
 
       .chef-circle {
-        width: 125px !important;
-        height: 125px !important;
-        margin-bottom: 10px;
+        width: 136px !important;
+        height: 136px !important;
+        margin-bottom: 24px;
         box-shadow: 0 0 0 5px rgba(240, 212, 154, 0.38), 0 0 0 10px rgba(200, 133, 58, 0.13), 0 8px 24px rgba(90, 48, 16, 0.18);
       }
 
       .hero-eyebrow {
         font-size: 0.57rem;
-        margin-top: 10px;
-        margin-bottom: 8px;
+        margin-top: 0;
+        margin-bottom: 24px;
         gap: 6px;
+        line-height: 1.45;
+        max-width: 310px;
       }
 
       .hero-eyebrow::before,
@@ -2225,29 +2240,32 @@
       }
 
       .hero-title {
-        font-size: clamp(1.35rem, 5.8vw, 1.85rem);
-        margin-bottom: 8px;
+        font-size: clamp(1.45rem, 6.1vw, 1.9rem);
+        line-height: 1.16;
+        margin-bottom: 14px;
       }
 
       .hero-sub {
-        font-size: 0.79rem;
-        margin-bottom: 14px;
-        max-width: 270px;
+        font-size: 0.82rem;
+        line-height: 1.62;
+        margin-bottom: 20px;
+        max-width: 310px;
       }
 
       .hero-ctas {
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
         width: 100%;
       }
 
       .hero-ctas .btn-primary,
       .hero-ctas .btn-outline {
-        width: 80%;
+        width: min(100%, 300px);
         text-align: center;
-        padding: 11px 16px;
-        font-size: 0.76rem;
+        padding: 13px 16px;
+        font-size: 0.78rem;
+        line-height: 1.2;
       }
 
       /* SECTIONS */
@@ -2377,23 +2395,29 @@
 
     @media(max-width:400px) {
       .chef-circle {
-        width: 108px !important;
-        height: 108px !important;
+        width: 126px !important;
+        height: 126px !important;
+        margin-bottom: 22px;
       }
 
       .hero-title {
-        font-size: 1.3rem !important;
+        font-size: 1.42rem !important;
       }
 
       .pastry-item {
-        width: 40px !important;
-        height: 40px !important;
-        font-size: 0.9rem !important;
+        width: 54px !important;
+        height: 54px !important;
+        font-size: 1.25rem !important;
+      }
+
+      .pastry-item .item-label {
+        font-size: 0.33rem !important;
+        max-width: 48px;
       }
 
       .hero-ctas .btn-primary,
       .hero-ctas .btn-outline {
-        width: 86% !important;
+        width: 100% !important;
       }
 
       .gallery-grid {
@@ -3041,7 +3065,7 @@
       <span class="modal-deco d1">🥐</span>
       <span class="modal-deco d2">🍰</span>
       <div class="modal-chef">
-        <img src="Assests/chef.png" alt="Ludovic Monsorez">
+        <img src="Assests/chef.png" alt="Ludovic Monsorez" decoding="async" fetchpriority="high">
       </div>
       <p class="modal-greeting">Bonjour! Or Hello?</p>
       <p class="modal-sub">How should I serve you today?<br><em>Comment puis-je vous servir aujourd'hui ?</em></p>
@@ -3091,7 +3115,7 @@
   <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo" aria-label="L·Monsorez Home">
-      <img src="Assests/logo.jpg" alt="Ludovic Monsorez logo" class="nav-logo-img">
+      <img src="Assests/logo.jpg" alt="Ludovic Monsorez logo" class="nav-logo-img" decoding="async" fetchpriority="high">
     </a>
     <ul class="nav-links">
       <li><a href="#about" data-en="About" data-fr="À propos">About</a></li>
@@ -3131,7 +3155,7 @@
       <p class="hero-eyebrow" data-en="Pastry Chef &amp; Viennoiserie Specialist"
         data-fr="Chef Pâtissier &amp; Spécialiste en Viennoiserie">Pastry Chef &amp; Viennoiserie Specialist</p>
       <div class="chef-circle">
-        <img src="Assests/chef.png" alt="Ludovic Monsorez"
+        <img src="Assests/chef.png" alt="Ludovic Monsorez" decoding="async" fetchpriority="high"
           style="width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;">
       </div>
       <h1 class="hero-title" data-en="Crafting <em>art</em> you can taste"
@@ -3154,7 +3178,7 @@
   <section id="about">
     <div class="about-grid">
       <div class="about-img-slot slide-left">
-        <img src="Assests/about-photo.jpg" alt="Ludovic Monsorez — Pastry Chef"
+        <img src="Assests/about-photo.jpg" alt="Ludovic Monsorez — Pastry Chef" loading="lazy" decoding="async"
           style="width:100%;height:100%;object-fit:cover;object-position:center 10%;display:block;">
       </div>
       <div class="slide-right">
@@ -4656,7 +4680,7 @@
     // 2. PRELOADER
     window.addEventListener('load', function () {
       gsap.to('#preloader', {
-        opacity: 0, scale: 1.04, duration: .7, delay: 1.4, ease: 'power2.in',
+        opacity: 0, scale: 1.04, duration: .45, delay: .2, ease: 'power2.in',
         onComplete: function () { var p = document.getElementById('preloader'); if (p) p.style.display = 'none'; }
       });
     });
@@ -5053,7 +5077,7 @@
             /* Run GSAP hero entrance now that language is chosen */
             var tl = gsap.timeline({ delay: 0.15, defaults: { ease: 'power3.out' } });
             tl.fromTo('.hero-eyebrow', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .9 })
-              .fromTo('.chef-circle', { opacity: 0, scale: .5, rotation: -15 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.1, ease: 'back.out(1.4)' }, '-=.5')
+              .fromTo('.chef-circle', { opacity: 0, y: 30, scale: .5, rotation: -15 }, { opacity: 1, y: 0, scale: 1, rotation: 0, duration: 1.1, ease: 'back.out(1.4)' }, '-=.5')
               .fromTo('.hero-title', { opacity: 0, y: 50, skewY: 3 }, { opacity: 1, y: 0, skewY: 0, duration: 1 }, '-=.7')
               .fromTo('.hero-sub', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .8 }, '-=.6')
               .fromTo('.hero-ctas', { opacity: 0, y: 24, scale: .95 }, { opacity: 1, y: 0, scale: 1, duration: .8, ease: 'back.out(1.2)' }, '-=.5');
@@ -5066,7 +5090,19 @@
             var hW = heroEl.offsetWidth, hH = heroEl.offsetHeight;
 
             /* Final resting positions as % of hero size (converted to px for GSAP) */
-            var finalPos = [
+            var isMobileHero = window.matchMedia('(max-width: 768px)').matches;
+            var finalPos = isMobileHero ? [
+              { top: '118px', left: '14px', bottom: 'auto', right: 'auto' },
+              { top: '126px', left: '23%', bottom: 'auto', right: 'auto' },
+              { top: '126px', left: 'auto', bottom: 'auto', right: '23%' },
+              { top: '118px', left: 'auto', bottom: 'auto', right: '14px' },
+              { top: '52%', left: '6px', bottom: 'auto', right: 'auto' },
+              { top: '52%', left: 'auto', bottom: 'auto', right: '6px' },
+              { top: 'auto', left: '14px', bottom: '46px', right: 'auto' },
+              { top: 'auto', left: '23%', bottom: '46px', right: 'auto' },
+              { top: 'auto', left: 'auto', bottom: '46px', right: '23%' },
+              { top: 'auto', left: 'auto', bottom: '46px', right: '14px' }
+            ] : [
               { top: '18%', left: '4%', bottom: 'auto', right: 'auto' },
               { top: '20%', left: '22%', bottom: 'auto', right: 'auto' },
               { top: '20%', left: 'auto', bottom: 'auto', right: '22%' },
@@ -5290,6 +5326,7 @@
           var panel = document.getElementById('cat-' + cat);
           if (!panel) return;
           panel.classList.add('active');
+          if (window.loadGalleryPanelImages) window.loadGalleryPanelImages(panel);
           // Staggered CSS reveal — no GSAP, no layout thrash
           var slots = panel.querySelectorAll('.gallery-slot');
           slots.forEach(function (s, i) {
@@ -5334,19 +5371,24 @@
         delete img.dataset.src;
       }
 
-      // Load images 600px before viewport
+      var rootMargin = window.matchMedia('(max-width: 768px)').matches ? '220px 0px' : '420px 0px';
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (!e.isIntersecting) return;
           loadImg(e.target);
           io.unobserve(e.target);
         });
-      }, { rootMargin: '600px 0px', threshold: 0 });
+      }, { rootMargin: rootMargin, threshold: 0 });
 
-      // Observe ALL gallery images
-      document.querySelectorAll('.gallery-slot img').forEach(function (img) {
-        io.observe(img);
-      });
+      function observePanelImages(panel) {
+        if (!panel) return;
+        panel.querySelectorAll('.gallery-slot img[data-src]').forEach(function (img) {
+          io.observe(img);
+        });
+      }
+
+      window.loadGalleryPanelImages = observePanelImages;
+      observePanelImages(document.querySelector('.cat-panel.active'));
     })();
 
     console.log('%c🎂 ScrollTrigger sections wired!', 'color:#c8853a;font-weight:900;font-size:13px');
