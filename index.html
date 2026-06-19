@@ -1717,14 +1717,35 @@
       };
     }
 
-    // 5. WHISK CURSOR
+    // 5. WHISK CURSOR — follows mouse on desktop, touch on mobile
     var whisk = document.getElementById('whisk-cursor');
+
+    /* Mouse tracking — reveal whisk on first move */
     document.addEventListener('mousemove', function (e) {
-      gsap.to(whisk, { left: e.clientX, top: e.clientY, duration: .08, ease: 'none', overwrite: true });
+      document.body.classList.add('has-mouse');
+      gsap.to(whisk, { left: e.clientX, top: e.clientY, duration: 0.08, ease: 'none', overwrite: true });
     });
+
+    /* Touch tracking — whisk follows finger, fades in/out */
+    document.addEventListener('touchstart', function (e) {
+      var t = e.touches[0];
+      gsap.set(whisk, { left: t.clientX, top: t.clientY });
+      gsap.to(whisk, { opacity: 1, scale: 1, duration: 0.18, ease: 'back.out(2)' });
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function (e) {
+      var t = e.touches[0];
+      gsap.to(whisk, { left: t.clientX, top: t.clientY, duration: 0.08, ease: 'none', overwrite: true });
+    }, { passive: true });
+
+    document.addEventListener('touchend', function () {
+      gsap.to(whisk, { opacity: 0, scale: 0.6, duration: 0.4, ease: 'power2.out' });
+    }, { passive: true });
+
+    /* Scale up on hover over interactive elements */
     document.querySelectorAll('a, button, .gallery-slot').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-hover'); gsap.to(whisk, { scale: 1.3, duration: .25, ease: 'back.out(2)' }); });
-      el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-hover'); gsap.to(whisk, { scale: 1, duration: .25, ease: 'back.out(2)' }); });
+      el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-hover'); gsap.to(whisk, { scale: 1.3, duration: 0.25, ease: 'back.out(2)' }); });
+      el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-hover'); gsap.to(whisk, { scale: 1, duration: 0.25, ease: 'back.out(2)' }); });
     });
 
     // 6. CURSOR TRAIL DOTS

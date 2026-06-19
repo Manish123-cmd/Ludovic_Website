@@ -52,6 +52,13 @@
       left: -200px;
       top: -200px;
       transform: translate(-50%, -8px);
+      /* Hidden on touch devices until first touch */
+      opacity: 0;
+    }
+
+    /* Show whisk immediately once mouse moves (desktop) */
+    body.has-mouse #whisk-cursor {
+      opacity: 1;
     }
 
     body.cursor-hover #whisk-cursor {
@@ -2045,24 +2052,10 @@
         background: rgba(253, 248, 242, 0.70);
       }
 
-      body {
-        cursor: auto;
-      }
-
-      /* Restore normal cursors on mobile for all elements */
-      a, button, label, [role="button"], [tabindex], select,
-      input[type="button"], input[type="submit"], input[type="reset"],
-      input[type="checkbox"], input[type="radio"] {
-        cursor: pointer;
-      }
-
+      /* Text inputs keep caret on mobile */
       input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]),
       textarea {
         cursor: auto;
-      }
-
-      #whisk-cursor {
-        display: none;
       }
 
       /* HERO — truly centered, icons frame the content */
