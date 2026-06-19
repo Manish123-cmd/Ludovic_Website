@@ -2208,20 +2208,29 @@
               var heroEl  = document.getElementById('hero');
               var hW = heroEl.offsetWidth, hH = heroEl.offsetHeight;
               var isMob   = window.matchMedia('(max-width: 768px)').matches;
+              /* Dynamically place bottom row just below the hero-stage content */
+              var _stageBottomPx = null;
+              if (isMob) {
+                var _stEl = heroEl.querySelector('.hero-stage');
+                if (_stEl) {
+                  var _heroTop = heroEl.getBoundingClientRect().top;
+                  _stageBottomPx = Math.round(_stEl.getBoundingClientRect().bottom - _heroTop) + 24;
+                }
+              }
               var finalPos = isMob ? [
-                /* top row — 4 icons spread across the top */
-                { top: '80px',  left: '8px',   bottom: 'auto', right: 'auto' },
-                { top: '88px',  left: '26%',   bottom: 'auto', right: 'auto' },
-                { top: '88px',  left: 'auto',  bottom: 'auto', right: '26%'  },
-                { top: '80px',  left: 'auto',  bottom: 'auto', right: '8px'  },
+                /* top row — just below the nav bar */
+                { top: '72px',  left: '8px',   bottom: 'auto', right: 'auto' },
+                { top: '80px',  left: '26%',   bottom: 'auto', right: 'auto' },
+                { top: '80px',  left: 'auto',  bottom: 'auto', right: '26%'  },
+                { top: '72px',  left: 'auto',  bottom: 'auto', right: '8px'  },
                 /* middle — flanking the chef circle */
                 { top: '34%',   left: '4px',   bottom: 'auto', right: 'auto' },
                 { top: '34%',   left: 'auto',  bottom: 'auto', right: '4px'  },
-                /* bottom row — 4 icons spread across the bottom */
-                { top: 'auto',  left: '8px',   bottom: '56px', right: 'auto' },
-                { top: 'auto',  left: '26%',   bottom: '56px', right: 'auto' },
-                { top: 'auto',  left: 'auto',  bottom: '56px', right: '26%'  },
-                { top: 'auto',  left: 'auto',  bottom: '56px', right: '8px'  }
+                /* bottom row — 24px below CTA buttons (calculated dynamically) */
+                { top: (_stageBottomPx || 'auto'), left: '8px',   bottom: _stageBottomPx ? 'auto' : '56px', right: 'auto' },
+                { top: (_stageBottomPx || 'auto'), left: '26%',   bottom: _stageBottomPx ? 'auto' : '56px', right: 'auto' },
+                { top: (_stageBottomPx || 'auto'), left: 'auto',  bottom: _stageBottomPx ? 'auto' : '56px', right: '26%'  },
+                { top: (_stageBottomPx || 'auto'), left: 'auto',  bottom: _stageBottomPx ? 'auto' : '56px', right: '8px'  }
               ] : [
                 { top: '18%',  left: '4%',   bottom: 'auto', right: 'auto' },
                 { top: '20%',  left: '22%',  bottom: 'auto', right: 'auto' },

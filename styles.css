@@ -2062,7 +2062,7 @@
       #hero {
         height: auto;
         min-height: 100svh;
-        padding: 72px 14px 118px;
+        padding: 72px 14px 32px;
         align-items: center;
         justify-content: center;
       }
