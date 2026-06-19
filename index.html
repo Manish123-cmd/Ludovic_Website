@@ -2503,19 +2503,42 @@
     })();
 
     // ── PASTRY ICON CLICK → ACTIVATE PASTRIES TAB + SCROLL ──
+    function goToPastries() {
+      var pastryTab = document.querySelector('.cat-tab[data-cat="pastries"]');
+      if (pastryTab) pastryTab.click();
+      var target = document.getElementById('creations');
+      if (lenis) {
+        lenis.scrollTo(target, { duration: 1.4, offset: -60, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
     document.querySelectorAll('.pastry-item').forEach(function (el) {
-      el.addEventListener('click', function () {
-        var pastryTab = document.querySelector('.cat-tab[data-cat="pastries"]');
-        if (pastryTab) pastryTab.click();
-        var target = document.getElementById('creations');
-        if (lenis) {
-          lenis.scrollTo(target, { duration: 1.4, offset: -60, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
-        } else {
-          target.scrollIntoView({ behavior: 'smooth' });
+      var _tx = 0, _ty = 0, _tapped = false;
+
+      /* Desktop mouse click */
+      el.addEventListener('click', function () { goToPastries(); });
+
+      /* Touch tap — fire immediately on touchend if finger barely moved */
+      el.addEventListener('touchstart', function (e) {
+        _tx = e.touches[0].clientX;
+        _ty = e.touches[0].clientY;
+        _tapped = false;
+      }, { passive: true });
+
+      el.addEventListener('touchend', function (e) {
+        var dx = Math.abs(e.changedTouches[0].clientX - _tx);
+        var dy = Math.abs(e.changedTouches[0].clientY - _ty);
+        if (dx < 14 && dy < 14) {
+          _tapped = true;
+          e.preventDefault(); /* block the 300ms ghost click */
+          goToPastries();
         }
       });
+
       el.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToPastries(); }
       });
     });
 

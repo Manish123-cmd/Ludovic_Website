@@ -1021,7 +1021,7 @@
       will-change: transform, opacity;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      z-index: 2;
+      z-index: 12;
       cursor: none;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
@@ -2071,7 +2071,7 @@
       .pastry-item {
         width: 56px !important;
         height: 56px !important;
-        z-index: 3;
+        z-index: 12;
       }
 
       .pi-emoji {
