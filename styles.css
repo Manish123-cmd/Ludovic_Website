@@ -1932,9 +1932,10 @@
         width: min(300px, 82vw);
         flex-direction: column;
         align-items: flex-start;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 0;
-        padding: 90px 36px 52px;
+        padding: 80px 36px 40px;
+        overflow-y: auto;
         background: rgba(253, 248, 242, 0.98);
         backdrop-filter: blur(28px);
         -webkit-backdrop-filter: blur(28px);
