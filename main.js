@@ -70,27 +70,6 @@ document.querySelectorAll('a, button, .gallery-slot').forEach(function (el) {
   el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-hover'); gsap.to(whisk, { scale: 1, duration: 0.25, ease: 'back.out(2)' }); });
 });
 
-// 6. CURSOR TRAIL DOTS
-(function () {
-  var dots = [], n = 10, mx = -200, my = -200;
-  for (var i = 0; i < n; i++) {
-    var d = document.createElement('div'); d.className = 'cdot';
-    var s = 8 - i * .65; d.style.cssText = 'width:' + s + 'px;height:' + s + 'px;';
-    document.body.appendChild(d); dots.push({ el: d, x: -200, y: -200 });
-  }
-  document.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; });
-  (function loop() {
-    var lx = mx, ly = my;
-    for (var i = 0; i < n; i++) {
-      var d = dots[i], f = .38 - i * .028;
-      d.x += (lx - d.x) * f; d.y += (ly - d.y) * f;
-      d.el.style.left = d.x + 'px'; d.el.style.top = d.y + 'px';
-      d.el.style.opacity = mx < 0 ? '0' : String(Math.max(0, .55 - i * .05));
-      lx = d.x; ly = d.y;
-    }
-    requestAnimationFrame(loop);
-  })();
-})();
 
 // 7. FLOUR PARTICLES
 (function () {
