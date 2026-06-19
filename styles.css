@@ -29,6 +29,19 @@
       cursor: none;
     }
 
+    /* Ensure whisk shows on ALL clickable elements — no OS pointer ever shows on desktop */
+    a, button, label, [role="button"], [tabindex], summary,
+    input[type="button"], input[type="submit"], input[type="reset"],
+    input[type="checkbox"], input[type="radio"], select {
+      cursor: none;
+    }
+
+    /* Restore text caret for text inputs */
+    input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]),
+    textarea {
+      cursor: auto;
+    }
+
     /* WHISK CURSOR */
     #whisk-cursor {
       position: fixed;
@@ -184,7 +197,7 @@
       display: none;
       background: none;
       border: none;
-      cursor: pointer;
+      cursor: none;
       padding: 8px;
       color: var(--choco);
       border-radius: 6px;
@@ -352,7 +365,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: 0.92rem;
       font-weight: 600;
-      cursor: pointer;
+      cursor: none;
       transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
       text-decoration: none;
     }
@@ -671,7 +684,7 @@
 
     .star-picker span {
       font-size: 1.8rem;
-      cursor: pointer !important;
+      cursor: none !important;
       transition: transform 0.15s ease, filter 0.15s ease;
       filter: grayscale(1) opacity(0.4);
       user-select: none;
@@ -701,7 +714,7 @@
       text-transform: uppercase;
       border: none;
       border-radius: 10px;
-      cursor: pointer;
+      cursor: none;
       transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
       box-shadow: 0 6px 20px rgba(200, 133, 58, 0.30);
       margin-top: 4px;
@@ -1002,7 +1015,7 @@
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       z-index: 2;
-      cursor: pointer;
+      cursor: none;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
@@ -2036,6 +2049,18 @@
         cursor: auto;
       }
 
+      /* Restore normal cursors on mobile for all elements */
+      a, button, label, [role="button"], [tabindex], select,
+      input[type="button"], input[type="submit"], input[type="reset"],
+      input[type="checkbox"], input[type="radio"] {
+        cursor: pointer;
+      }
+
+      input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]),
+      textarea {
+        cursor: auto;
+      }
+
       #whisk-cursor {
         display: none;
       }
@@ -2387,7 +2412,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
-      cursor: pointer;
+      cursor: none;
       transition: transform .3s, box-shadow .3s;
     }
 
@@ -2490,7 +2515,7 @@
       text-transform: uppercase;
       padding: 10px 26px;
       border-radius: 50px;
-      cursor: pointer;
+      cursor: none;
       transition: all .3s ease;
     }
 
