@@ -705,27 +705,58 @@ window.addEventListener('resize', function () { ScrollTrigger.refresh(); });
   else setTimeout(preloadAll, 1800);
 })();
 
-// PASTRY ICON CLICK → PASTRIES TAB + SCROLL
-function goToPastries() {
-  var pastryTab = document.querySelector('.cat-tab[data-cat="pastries"]');
-  if (pastryTab) pastryTab.click();
-  var target = document.getElementById('creations');
-  if (lenis) {
-    lenis.scrollTo(target, { duration: 1.4, offset: -60, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
-  } else {
-    target.scrollIntoView({ behavior: 'smooth' });
+// PASTRY ICON CLICK → GALLERY DEEP LINK
+function goToGallery(cat, label) {
+  var tab = document.querySelector('.cat-tab[data-cat="' + cat + '"]');
+  if (tab) tab.click();
+
+  var creations = document.getElementById('creations');
+
+  if (!label) {
+    if (lenis) lenis.scrollTo(creations, { duration: 1.4, offset: -80, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+    else creations.scrollIntoView({ behavior: 'smooth' });
+    return;
   }
+
+  // Find matching gallery slot by label text
+  var panel = document.getElementById('cat-' + cat);
+  var matched = null;
+  if (panel) {
+    panel.querySelectorAll('.g-label').forEach(function (el) {
+      if (!matched && el.textContent.trim().toLowerCase().indexOf(label.toLowerCase()) !== -1) {
+        matched = el.closest('.gallery-slot');
+      }
+    });
+  }
+
+  // Step 1: scroll to section
+  if (lenis) lenis.scrollTo(creations, { duration: 1.0, offset: -80, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+  else creations.scrollIntoView({ behavior: 'smooth' });
+
+  if (!matched) return;
+
+  // Step 2: after section arrives, scroll to the specific slot and spotlight it
+  setTimeout(function () {
+    if (lenis) lenis.scrollTo(matched, { duration: 1.0, offset: -160 });
+    else matched.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    matched.classList.add('g-spotlight');
+    setTimeout(function () { matched.classList.remove('g-spotlight'); }, 2500);
+  }, 1200);
 }
+
 document.querySelectorAll('.pastry-item').forEach(function (el) {
   var _tx = 0, _ty = 0;
-  el.addEventListener('click', function () { goToPastries(); });
+  function trigger() {
+    goToGallery(el.dataset.cat || 'pastries', el.dataset.label || '');
+  }
+  el.addEventListener('click', trigger);
   el.addEventListener('touchstart', function (e) { _tx = e.touches[0].clientX; _ty = e.touches[0].clientY; }, { passive: true });
   el.addEventListener('touchend', function (e) {
     var dx = Math.abs(e.changedTouches[0].clientX - _tx);
     var dy = Math.abs(e.changedTouches[0].clientY - _ty);
-    if (dx < 14 && dy < 14) { e.preventDefault(); goToPastries(); }
+    if (dx < 14 && dy < 14) { e.preventDefault(); trigger(); }
   });
-  el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToPastries(); } });
+  el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); } });
 });
 
 // EXIT INTENT
